@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 10:02:48 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 13:04:04 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:20:52 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../../libft/libft.h"
 # include "../../mlx/mlx.h"
 # include "keys.h"
-# include "keys_mac.h"
 
 typedef struct s_point
 {
@@ -74,6 +73,7 @@ typedef struct s_program
 	int		updated;
 	int		mouse_right;
 	int		mouse_left;
+	char	*filename;
 }	t_program;
 
 // controls_utils.c

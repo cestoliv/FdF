@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:53:45 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 12:53:56 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:35:24 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	draw_instructions(t_program *p)
 	mlx_string_put(p->mlx, p->win, 20, 113, 0xFFFFFF,
 		"I                   -> Isometric Projection");
 	draw_color_instructions(p);
+	mlx_string_put(p->mlx, p->win, 500, 74, 0xFFFFFF,
+		"Currently viewing : ");
+	if (ft_strrchr(p->filename, '/') > 0)
+		mlx_string_put(p->mlx, p->win, 640, 74, 0xFFFFFF,
+			ft_strrchr(p->filename, '/') + 1);
+	else
+		mlx_string_put(p->mlx, p->win, 640, 74, 0xFFFFFF, p->filename);
 }
 
 void	draw_color_instructions(t_program *p)

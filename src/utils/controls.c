@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:19:25 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 12:37:36 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/06 10:24:51 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	deal_key(int key, void *param)
 
 	p = param;
 	if (key == KEY_I)
-		set_dimetric(p);
+		set_isometric(p);
 	else if (key == KEY_R)
 		set_dimetric(p);
 	else if (key == KEY_T)
@@ -27,6 +27,8 @@ int	deal_key(int key, void *param)
 		p->map.z_increase += 0.2;
 	else if (key == KEY_MINUS)
 		p->map.z_increase -= 0.2;
+	else if (key == KEY_ESC)
+		exit(EXIT_SUCCESS);
 	else if (!set_color(key, p))
 	{
 		p->updated = 1;

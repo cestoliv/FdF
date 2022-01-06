@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:55:46 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 13:05:17 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:29:59 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,33 @@ void	init_program(t_program *p)
 	p->map.z_increase = 0.2;
 }
 
-int	main(void)
+char	*get_check_map_file(int argc, char **argv, t_program *p)
+{
+	int	fd;
+
+	if (argc != 2)
+	{
+		ft_putstr_fd("Usage : fdf <map file>\n", 1);
+		exit(EXIT_FAILURE);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0 || read(fd, 0, 0) < 0)
+	{
+		ft_putstr_fd("Can't read file : ", 1);
+		ft_putstr_fd(argv[1], 1);
+		ft_putstr_fd("\n", 1);
+		exit(EXIT_FAILURE);
+	}
+	p->filename = argv[1];
+	return (argv[1]);
+}
+
+int	main(int argc, char **argv)
 {
 	t_program	p;
 
 	init_program(&p);
+	parse_map_file(get_check_map_file(argc, argv, &p), &p.map.m3d);
 	p.mlx = mlx_init();
 	if (!p.mlx)
 		exit(EXIT_FAILURE);
@@ -66,7 +88,6 @@ int	main(void)
 		exit(EXIT_FAILURE);
 	p.img.buffer = mlx_get_data_addr(
 			p.img.img, &p.img.pbits, &p.img.lbytes, &p.img.endian);
-	parse_map_file("maps/julia.fdf", &p.map.m3d);
 	p.map.m2d = alloc_2dmap_array(p.map.m3d);
 	draw_instructions(&p);
 	render(&p);

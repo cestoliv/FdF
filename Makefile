@@ -1,52 +1,43 @@
-SRCS		=	src/utils/controls_utils.c \
-				src/utils/controls.c \
-				src/utils/convert_utils.c \
-				src/utils/convert.c \
-				src/utils/draw.c \
-				src/utils/img.c \
-				src/utils/instructions.c \
-				src/utils/map.c \
-				src/utils/matrix.c \
-				src/utils/rotation_matrix.c \
-				src/utils/utils.c \
-				src/main.c
-HEADERS		=	src/includes/fdf.h \
-				src/includes/keys_linux.h \
-				src/includes/keys_mac.h
-OBJS		=	${SRCS:.c=.o}
+OBJS		=	src/utils/controls_utils.o \
+				src/utils/controls.o \
+				src/utils/convert_utils.o \
+				src/utils/convert.o \
+				src/utils/draw.o \
+				src/utils/img.o \
+				src/utils/instructions.o \
+				src/utils/map.o \
+				src/utils/matrix.o \
+				src/utils/rotation_matrix.o \
+				src/utils/utils.o \
+				src/main.o
+DFILES		=	${OBJS:.o=.d}
 NAME		=	fdf
 CC			=	clang -Wall -Wextra -Werror
-FLAGS		=	-lm -Lmlx -lmlx -Llibft -lft
-FLAGS_MACOS	=	-framework OpenGL -framework AppKit
-FLAGS_LINUX	=	-lXext -lX11
+FLAGS		=	-lm -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
 
-%.o: %.c ${HEADERS}
-			${CC} -Isrc/includes -c $< -o ${<:.c=.o}
+%.o: %.c
+			${CC} -MD -MP $< -c -o $@
 
 all:		${NAME}
 
-${NAME}:	${OBJS} ${HEADERS}
+${NAME}:	${OBJS}
 			make -C libft
 			make -C mlx
 			cp mlx/libmlx.dylib .
-			${CC} ${FLAGS} ${FLAGS_MACOS} -o $@ ${OBJS}
-
-linux:		${OBJS} ${HEADERS}
-			make -C libft
-			make -C mlx
-			${CC} ${OBJS} ${FLAGS} ${FLAGS_LINUX} -o ${NAME}
+			${CC} ${FLAGS} $^ -o $@
 
 clean:
+			rm -rf ${OBJS} ${DFILES}
 			make clean -C libft
 			make clean -C mlx
-			rm -rf ${OBJS}
 			rm libmlx.dylib
 
 fclean:		clean
 			make fclean -C libft
-			make clean -C mlx
 			rm -rf ${NAME}
 
 re:			fclean all
 
-.PHONY:		all clean fclean re ${NAME} linux
+-include ${DFILES}
+
+.PHONY:		all clean fclean re
