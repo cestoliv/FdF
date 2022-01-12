@@ -37,6 +37,6 @@ fclean:		clean
 			make fclean -C libft
 			rm -rf ${NAME}
 
-re:			fclean alll
+re:			fclean all
 
 .PHONY:		all clean fclean re
