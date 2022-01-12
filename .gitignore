@@ -1,14 +1,9 @@
 *.swp
-a.out
-*.
-*.tgz
-minilibx/
+minilibx_linux/
 mlx/
 .DS_Store
 fdf
-fdf_ex
 *.dylib
 *.o
-*.d
 *.out.*
 .vscode

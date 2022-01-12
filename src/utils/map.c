@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:51:49 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/12 16:07:15 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:05:30 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	get_map_width(char *filename)
 	cur = 0;
 	fd = open(filename, O_RDONLY);
 	line = get_next_line(fd, GNL_CLEAR);
-	while (line[cur])
+	while (line && line[cur])
 	{
 		if ((line[cur] == ' ' && line[cur - 1] != ' ') || !line[cur + 1])
 			width++;

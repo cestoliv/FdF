@@ -13,8 +13,9 @@ SRCS		=	src/utils/controls_utils.c \
 HEADERS		= 	src/includes/fdf.h \
 				src/includes/keys.h
 NAME		=	fdf
-CC			=	clang -Wall -Wextra -Werror
+CC			=	clang -Wall -Wextra -Werror -g
 FLAGS		=	-lm -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
+FLAGS_LINUX	=	-lm -Lminilibx_linux -lmlx -Llibft -lft -lXext -lX11
 
 %.o: %.c ${HEADERS}
 			${CC} $< -c -o $@
@@ -26,6 +27,11 @@ ${NAME}:	${SRCS:.c=.o} ${HEADERS}
 			make -C mlx
 			cp mlx/libmlx.dylib .
 			${CC} ${SRCS:.c=.o} -o ${NAME} ${FLAGS}
+
+linux:		${SRCS:.c=.o} ${HEADERS}
+			make -C libft
+			make -C minilibx_linux
+			${CC} ${SRCS:.c=.o} -o ${NAME} ${FLAGS_LINUX}
 
 clean:
 			rm -rf ${SRCS:.c=.o}
@@ -39,4 +45,6 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+re_linux:	fclean linux
+
+.PHONY:		all clean fclean re linux re_linux

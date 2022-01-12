@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:41:39 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 12:42:10 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:05:10 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_3dmap_width(t_3Dpoint **map_3d)
 	int	width;
 
 	width = 0;
-	while (!map_3d[0][width].last)
+	while (map_3d[0] && !map_3d[0][width].last)
 		width++;
 	return (width);
 }
