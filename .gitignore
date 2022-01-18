@@ -1,6 +1,4 @@
 *.swp
-minilibx_linux/
-mlx/
 .DS_Store
 fdf
 *.dylib
