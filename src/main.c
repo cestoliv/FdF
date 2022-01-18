@@ -6,7 +6,7 @@
 /*   By: ocartier <ocartier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:55:46 by ocartier          #+#    #+#             */
-/*   Updated: 2022/01/05 14:29:59 by ocartier         ###   ########.fr       */
+/*   Updated: 2022/01/18 12:41:20 by ocartier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_program(t_program *p)
 	p->map.rot_z = 0;
 	p->map.color = 0xFFFFFF;
 	p->map.z_increase = 0.2;
+	set_dimetric(p);
 }
 
 char	*get_check_map_file(int argc, char **argv, t_program *p)

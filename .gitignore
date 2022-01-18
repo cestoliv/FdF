@@ -1,7 +1,10 @@
 *.swp
 .DS_Store
 fdf
-*.dylib
 *.o
 *.out.*
 .vscode
+
+*.swiftdoc
+*.swiftmodule
+*.dylib
